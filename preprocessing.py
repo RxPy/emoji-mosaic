@@ -9,17 +9,10 @@ with open('emoji-data.json') as data_file:
 
 
 def average_color(image):
-    colour_tuple = [None, None, None]
-    for channel in range(3):
-        # Get data for one channel at a time
-        pixels = image.getdata(band=channel)
-
-        values = []
-        for pixel in pixels:
-            values.append(pixel)
-
-        colour_tuple[channel] = sum(values) / len(values)
-    return colour_tuple
+    def single_channel(channel):
+        pixel = [p for p in image.getdata(band=channel)]
+        return sum(pixel) / len(pixel)
+    return map(single_channel, range(3))
 
 result = []
 for d in data:
