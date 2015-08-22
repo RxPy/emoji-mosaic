@@ -18,7 +18,6 @@ result = []
 for d in data:
     try:
         image = Image.open('emoji/' + d['image'])
-        image.load()
         d_result = {'avg_color': average_color(image),
                     'image': d['image'],
                     'short_name': d['short_name'],
