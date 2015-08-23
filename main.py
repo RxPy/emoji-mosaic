@@ -25,11 +25,10 @@ def avg_color(colors):
 def zoom_image(image, ratio=DEFAULT_EMOJI_SIZE):
     """
     Convert images into mosaic blocks with their average colors
-    :param image: the input image
+    :param image: Image
     :param ratio: the size of a mosaic block
-    :return: image
+    :return: image pixel data
     """
-    # Get the image size
     width, height = image.size
 
     # Load the image matrix
@@ -40,7 +39,7 @@ def zoom_image(image, ratio=DEFAULT_EMOJI_SIZE):
 
     # get the location of each pixel in a block
     ran = range(ratio)
-    blocks = np.array(tuple(product(ran, ran)))
+    blocks = np.array(list(product(ran, ran)))
 
     # For each block, take the averge color and fill it into the zoomed image matrix
     for x, y in product(range(0, width - ratio if width % ratio != 0 else width, ratio),
@@ -52,6 +51,10 @@ def zoom_image(image, ratio=DEFAULT_EMOJI_SIZE):
 
 
 def zoom_emoji(file=None, size=DEFAULT_EMOJI_SIZE):
+    """
+    :param file: emoji file name
+    :return: Image
+    """
     emoji = Image.open('/'.join([EMOJI_FOLDER, file]))
     emoji.thumbnail((size, size), Image.ANTIALIAS)
     return emoji
