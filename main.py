@@ -11,13 +11,17 @@ image = Image.open(filename)
 
 img = image.load()
 
+DEFAULT_EMOJI_SIZE = 32
+
+EMOJI_FOLDER = 'emoji'
+
 
 def avg_color(colors):
     # Given a list of pixels, return the average color of them
     return tuple(pixel / len(colors) for pixel in reduce(lambda p, q: map(lambda x, y: float(x)+y, p, q), colors))
 
 
-def zoom_pic(radio=2):
+def zoom_image(radio=DEFAULT_EMOJI_SIZE):
     width, height = image.size
     zoomed_pixels = np.zeros((3, width/radio, height/radio))
 
@@ -30,3 +34,8 @@ def zoom_pic(radio=2):
             zoomed_pixels[rgb][x/radio, y/radio] = color[rgb]
     return zoomed_pixels
 
+
+def zoom_emoji(file=None, size=DEFAULT_EMOJI_SIZE):
+    emoji = Image.open('/'.join([EMOJI_FOLDER, file]))
+    emoji.thumbnail((size, size), Image.ANTIALIAS)
+    return emoji
