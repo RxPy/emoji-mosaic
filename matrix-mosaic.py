@@ -84,7 +84,7 @@ def closest_match2(zoomed_image):
 
 # For test
 # readin the filename
-filename = 'tower.jpg'
+filename = 'emoji.jpg'
 
 # the opened image is called "image"
 image = Image.open(filename)
