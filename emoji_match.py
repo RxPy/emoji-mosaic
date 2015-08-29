@@ -44,7 +44,3 @@ def closest_match(colordiff_matrix):
 
 
 
-
-
-
-
